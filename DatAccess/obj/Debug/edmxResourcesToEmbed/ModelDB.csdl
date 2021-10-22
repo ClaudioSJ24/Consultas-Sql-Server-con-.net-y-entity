@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB2LocalSQLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="DEPARTMENT">
+    <Key>
+      <PropertyRef Name="DEPTNO" />
+    </Key>
+    <Property Name="DEPTNO" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="DEPTNAME" Type="String" MaxLength="29" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MGRNO" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <Property Name="ADMRDEPT" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="LOCATION" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="EMPLOYEEs" Relationship="Self.FK__EMPLOYEE__WORKDE__3D5E1FD2" FromRole="DEPARTMENT" ToRole="EMPLOYEE" />
+    <NavigationProperty Name="PROJECTs" Relationship="Self.FK__PROJECT__DEPTNO__3E52440B" FromRole="DEPARTMENT" ToRole="PROJECT" />
+  </EntityType>
+  <EntityType Name="EMP_ACT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="EMPNO" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PROJNO" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="ACTNO" Type="Int16" Nullable="false" />
+    <Property Name="EMPTIME" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="EMSTDATE" Type="DateTime" Precision="0" />
+    <Property Name="EMENDATE" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__EMP_ACT__EMPNO__3F466844" FromRole="EMP_ACT" ToRole="EMPLOYEE" />
+    <NavigationProperty Name="PROJECT" Relationship="Self.FK__EMP_ACT__PROJNO__403A8C7D" FromRole="EMP_ACT" ToRole="PROJECT" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="EMPNO" />
+    </Key>
+    <Property Name="EMPNO" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="FIRSTNME" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="MIDINIT" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="LASTNAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="WORKDEPT" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+    <Property Name="PHONENO" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="HIREDATE" Type="DateTime" Precision="0" />
+    <Property Name="JOB" Type="String" MaxLength="8" FixedLength="true" Unicode="false" />
+    <Property Name="EDLEVEL" Type="Int16" Nullable="false" />
+    <Property Name="SEX" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="BIRTHDATE" Type="DateTime" Precision="0" />
+    <Property Name="SALARY" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="BONUS" Type="Decimal" Precision="9" Scale="2" />
+    <Property Name="COMM" Type="Decimal" Precision="9" Scale="2" />
+    <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__EMPLOYEE__WORKDE__3D5E1FD2" FromRole="EMPLOYEE" ToRole="DEPARTMENT" />
+    <NavigationProperty Name="EMP_ACT" Relationship="Self.FK__EMP_ACT__EMPNO__3F466844" FromRole="EMPLOYEE" ToRole="EMP_ACT" />
+  </EntityType>
+  <EntityType Name="PROJECT">
+    <Key>
+      <PropertyRef Name="PROJNO" />
+    </Key>
+    <Property Name="PROJNO" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PROJNAME" Type="String" MaxLength="24" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="DEPTNO" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="RESPEMP" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="PRSTAFF" Type="Decimal" Precision="5" Scale="2" />
+    <Property Name="PRSTDATE" Type="DateTime" Precision="0" />
+    <Property Name="PRENDATE" Type="DateTime" Precision="0" />
+    <Property Name="MAJPROJ" Type="String" MaxLength="6" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="DEPARTMENT" Relationship="Self.FK__PROJECT__DEPTNO__3E52440B" FromRole="PROJECT" ToRole="DEPARTMENT" />
+    <NavigationProperty Name="EMP_ACT" Relationship="Self.FK__EMP_ACT__PROJNO__403A8C7D" FromRole="PROJECT" ToRole="EMP_ACT" />
+  </EntityType>
+  <Association Name="FK__EMPLOYEE__WORKDE__3D5E1FD2">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="DEPTNO" />
+      </Principal>
+      <Dependent Role="EMPLOYEE">
+        <PropertyRef Name="WORKDEPT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROJECT__DEPTNO__3E52440B">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="1" />
+    <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="DEPTNO" />
+      </Principal>
+      <Dependent Role="PROJECT">
+        <PropertyRef Name="DEPTNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EMP_ACT__EMPNO__3F466844">
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+    <End Role="EMP_ACT" Type="Self.EMP_ACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEE">
+        <PropertyRef Name="EMPNO" />
+      </Principal>
+      <Dependent Role="EMP_ACT">
+        <PropertyRef Name="EMPNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EMP_ACT__PROJNO__403A8C7D">
+    <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="1" />
+    <End Role="EMP_ACT" Type="Self.EMP_ACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROJECT">
+        <PropertyRef Name="PROJNO" />
+      </Principal>
+      <Dependent Role="EMP_ACT">
+        <PropertyRef Name="PROJNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB2LocalSQLEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="DEPARTMENTs" EntityType="Self.DEPARTMENT" />
+    <EntitySet Name="EMP_ACT" EntityType="Self.EMP_ACT" />
+    <EntitySet Name="EMPLOYEEs" EntityType="Self.EMPLOYEE" />
+    <EntitySet Name="PROJECTs" EntityType="Self.PROJECT" />
+    <AssociationSet Name="FK__EMPLOYEE__WORKDE__3D5E1FD2" Association="Self.FK__EMPLOYEE__WORKDE__3D5E1FD2">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROJECT__DEPTNO__3E52440B" Association="Self.FK__PROJECT__DEPTNO__3E52440B">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENTs" />
+      <End Role="PROJECT" EntitySet="PROJECTs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EMP_ACT__EMPNO__3F466844" Association="Self.FK__EMP_ACT__EMPNO__3F466844">
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEEs" />
+      <End Role="EMP_ACT" EntitySet="EMP_ACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EMP_ACT__PROJNO__403A8C7D" Association="Self.FK__EMP_ACT__PROJNO__403A8C7D">
+      <End Role="PROJECT" EntitySet="PROJECTs" />
+      <End Role="EMP_ACT" EntitySet="EMP_ACT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

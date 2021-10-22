@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB2LocalSQLModelStoreContainer" CdmEntityContainer="DB2LocalSQLEntities">
+    <EntitySetMapping Name="DEPARTMENTs">
+      <EntityTypeMapping TypeName="DB2LocalSQLModel.DEPARTMENT">
+        <MappingFragment StoreEntitySet="DEPARTMENT">
+          <ScalarProperty Name="DEPTNO" ColumnName="DEPTNO" />
+          <ScalarProperty Name="DEPTNAME" ColumnName="DEPTNAME" />
+          <ScalarProperty Name="MGRNO" ColumnName="MGRNO" />
+          <ScalarProperty Name="ADMRDEPT" ColumnName="ADMRDEPT" />
+          <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMP_ACT">
+      <EntityTypeMapping TypeName="DB2LocalSQLModel.EMP_ACT">
+        <MappingFragment StoreEntitySet="EMP_ACT">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="EMPNO" ColumnName="EMPNO" />
+          <ScalarProperty Name="PROJNO" ColumnName="PROJNO" />
+          <ScalarProperty Name="ACTNO" ColumnName="ACTNO" />
+          <ScalarProperty Name="EMPTIME" ColumnName="EMPTIME" />
+          <ScalarProperty Name="EMSTDATE" ColumnName="EMSTDATE" />
+          <ScalarProperty Name="EMENDATE" ColumnName="EMENDATE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EMPLOYEEs">
+      <EntityTypeMapping TypeName="DB2LocalSQLModel.EMPLOYEE">
+        <MappingFragment StoreEntitySet="EMPLOYEE">
+          <ScalarProperty Name="EMPNO" ColumnName="EMPNO" />
+          <ScalarProperty Name="FIRSTNME" ColumnName="FIRSTNME" />
+          <ScalarProperty Name="MIDINIT" ColumnName="MIDINIT" />
+          <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+          <ScalarProperty Name="WORKDEPT" ColumnName="WORKDEPT" />
+          <ScalarProperty Name="PHONENO" ColumnName="PHONENO" />
+          <ScalarProperty Name="HIREDATE" ColumnName="HIREDATE" />
+          <ScalarProperty Name="JOB" ColumnName="JOB" />
+          <ScalarProperty Name="EDLEVEL" ColumnName="EDLEVEL" />
+          <ScalarProperty Name="SEX" ColumnName="SEX" />
+          <ScalarProperty Name="BIRTHDATE" ColumnName="BIRTHDATE" />
+          <ScalarProperty Name="SALARY" ColumnName="SALARY" />
+          <ScalarProperty Name="BONUS" ColumnName="BONUS" />
+          <ScalarProperty Name="COMM" ColumnName="COMM" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PROJECTs">
+      <EntityTypeMapping TypeName="DB2LocalSQLModel.PROJECT">
+        <MappingFragment StoreEntitySet="PROJECT">
+          <ScalarProperty Name="PROJNO" ColumnName="PROJNO" />
+          <ScalarProperty Name="PROJNAME" ColumnName="PROJNAME" />
+          <ScalarProperty Name="DEPTNO" ColumnName="DEPTNO" />
+          <ScalarProperty Name="RESPEMP" ColumnName="RESPEMP" />
+          <ScalarProperty Name="PRSTAFF" ColumnName="PRSTAFF" />
+          <ScalarProperty Name="PRSTDATE" ColumnName="PRSTDATE" />
+          <ScalarProperty Name="PRENDATE" ColumnName="PRENDATE" />
+          <ScalarProperty Name="MAJPROJ" ColumnName="MAJPROJ" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

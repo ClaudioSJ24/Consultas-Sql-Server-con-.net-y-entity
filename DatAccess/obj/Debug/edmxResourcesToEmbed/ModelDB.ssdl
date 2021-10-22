@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB2LocalSQLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="DEPARTMENT">
+    <Key>
+      <PropertyRef Name="DEPTNO" />
+    </Key>
+    <Property Name="DEPTNO" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="DEPTNAME" Type="varchar" MaxLength="29" Nullable="false" />
+    <Property Name="MGRNO" Type="char" MaxLength="6" />
+    <Property Name="ADMRDEPT" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="LOCATION" Type="char" MaxLength="16" />
+  </EntityType>
+  <EntityType Name="EMP_ACT">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="EMPNO" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="PROJNO" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="ACTNO" Type="smallint" Nullable="false" />
+    <Property Name="EMPTIME" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="EMSTDATE" Type="date" />
+    <Property Name="EMENDATE" Type="date" />
+  </EntityType>
+  <EntityType Name="EMPLOYEE">
+    <Key>
+      <PropertyRef Name="EMPNO" />
+    </Key>
+    <Property Name="EMPNO" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="FIRSTNME" Type="varchar" MaxLength="12" Nullable="false" />
+    <Property Name="MIDINIT" Type="char" MaxLength="1" Nullable="false" />
+    <Property Name="LASTNAME" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="WORKDEPT" Type="char" MaxLength="3" />
+    <Property Name="PHONENO" Type="char" MaxLength="4" />
+    <Property Name="HIREDATE" Type="date" />
+    <Property Name="JOB" Type="char" MaxLength="8" />
+    <Property Name="EDLEVEL" Type="smallint" Nullable="false" />
+    <Property Name="SEX" Type="char" MaxLength="1" />
+    <Property Name="BIRTHDATE" Type="date" />
+    <Property Name="SALARY" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="BONUS" Type="decimal" Precision="9" Scale="2" />
+    <Property Name="COMM" Type="decimal" Precision="9" Scale="2" />
+  </EntityType>
+  <EntityType Name="PROJECT">
+    <Key>
+      <PropertyRef Name="PROJNO" />
+    </Key>
+    <Property Name="PROJNO" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="PROJNAME" Type="varchar" MaxLength="24" Nullable="false" />
+    <Property Name="DEPTNO" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="RESPEMP" Type="char" MaxLength="6" Nullable="false" />
+    <Property Name="PRSTAFF" Type="decimal" Precision="5" Scale="2" />
+    <Property Name="PRSTDATE" Type="date" />
+    <Property Name="PRENDATE" Type="date" />
+    <Property Name="MAJPROJ" Type="char" MaxLength="6" />
+  </EntityType>
+  <Association Name="FK__EMP_ACT__EMPNO__3F466844">
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="1" />
+    <End Role="EMP_ACT" Type="Self.EMP_ACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EMPLOYEE">
+        <PropertyRef Name="EMPNO" />
+      </Principal>
+      <Dependent Role="EMP_ACT">
+        <PropertyRef Name="EMPNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EMP_ACT__PROJNO__403A8C7D">
+    <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="1" />
+    <End Role="EMP_ACT" Type="Self.EMP_ACT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROJECT">
+        <PropertyRef Name="PROJNO" />
+      </Principal>
+      <Dependent Role="EMP_ACT">
+        <PropertyRef Name="PROJNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__EMPLOYEE__WORKDE__3D5E1FD2">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="0..1" />
+    <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="DEPTNO" />
+      </Principal>
+      <Dependent Role="EMPLOYEE">
+        <PropertyRef Name="WORKDEPT" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__PROJECT__DEPTNO__3E52440B">
+    <End Role="DEPARTMENT" Type="Self.DEPARTMENT" Multiplicity="1" />
+    <End Role="PROJECT" Type="Self.PROJECT" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DEPARTMENT">
+        <PropertyRef Name="DEPTNO" />
+      </Principal>
+      <Dependent Role="PROJECT">
+        <PropertyRef Name="DEPTNO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB2LocalSQLModelStoreContainer">
+    <EntitySet Name="DEPARTMENT" EntityType="Self.DEPARTMENT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMP_ACT" EntityType="Self.EMP_ACT" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PROJECT" EntityType="Self.PROJECT" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__EMP_ACT__EMPNO__3F466844" Association="Self.FK__EMP_ACT__EMPNO__3F466844">
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+      <End Role="EMP_ACT" EntitySet="EMP_ACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EMP_ACT__PROJNO__403A8C7D" Association="Self.FK__EMP_ACT__PROJNO__403A8C7D">
+      <End Role="PROJECT" EntitySet="PROJECT" />
+      <End Role="EMP_ACT" EntitySet="EMP_ACT" />
+    </AssociationSet>
+    <AssociationSet Name="FK__EMPLOYEE__WORKDE__3D5E1FD2" Association="Self.FK__EMPLOYEE__WORKDE__3D5E1FD2">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+      <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__PROJECT__DEPTNO__3E52440B" Association="Self.FK__PROJECT__DEPTNO__3E52440B">
+      <End Role="DEPARTMENT" EntitySet="DEPARTMENT" />
+      <End Role="PROJECT" EntitySet="PROJECT" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
